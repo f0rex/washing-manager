@@ -14,7 +14,7 @@
                 <div class="select is-fullwidth">
                     <select name="weeks">
                         @for ($i = 1; $i < 11; $i++)
-                        <option value="{{ $i }}">{{ $i }} @if ($i == 1) settimana @else settimane @endif</option>
+                        <option value="{{ $i * 4 }}">{{ $i * 4 }} settimane</option>
                         @endfor
                     </select>
                 </div>

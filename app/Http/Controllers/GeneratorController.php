@@ -33,8 +33,8 @@ class GeneratorController extends Controller
         $groups = Group::all();
         foreach ($groups as $group) {
             $workingDaysInAWeek = $group->mon + $group->tue + $group->wed + $group->thu + $group->fri + $group->sat = $group->sun;
-            $timesToWashEachVehicleInternally = $group->internal * $weeks;
-            $timesToWashEachVehicleExternally = $group->external * $weeks;
+            $timesToWashEachVehicleInternally = $group->internal * $weeks / 4;
+            $timesToWashEachVehicleExternally = $group->external * $weeks / 4;
             $vehicles = $group->vehicles->sortBy('last_washed_internally_at');
             $vehiclesToWashInternally = Collection::times($timesToWashEachVehicleInternally, function ($number) use ($vehicles) {
                 return $vehicles;
@@ -44,10 +44,10 @@ class GeneratorController extends Controller
                 return $vehicles;
             })->collapse();
             // Calculating day left for each category for the span of time 
-            $workingDaysLeftForInternal = $workingDaysInAWeek * 4 * $weeks;
-            $workingDaysLeftForExternal = $workingDaysInAWeek * 4 * $weeks;
+            $workingDaysLeftForInternal = $workingDaysInAWeek * $weeks;
+            $workingDaysLeftForExternal = $workingDaysInAWeek * $weeks;
             $day = now();
-            for ($i=0; $i < 28 * $weeks; $i++) { 
+            for ($i=0; $i < 7 * $weeks; $i++) { 
                 $day = $day->add(1, 'day');
 
                 if ($group->{strtolower($day->locale('en')->isoFormat('ddd'))} && $workingDaysLeftForInternal > 0) {
