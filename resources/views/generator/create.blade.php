@@ -12,7 +12,7 @@
             <div class="field is-grouped is-grouped-centered">
                 <div class="control">
                 <div class="select is-fullwidth">
-                    <select name="weeks">
+                    <select name="weeks" required>
                         @for ($i = 1; $i < 11; $i++)
                         <option value="{{ $i * 4 }}">{{ $i * 4 }} settimane</option>
                         @endfor

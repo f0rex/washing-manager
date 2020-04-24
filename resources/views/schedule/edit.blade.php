@@ -11,14 +11,14 @@
     <div class="field">
         <label class="label">Data lavaggio</label>
         <div class="control">
-            <input name="scheduled_at" class="input" type="date" value="{{ $schedule->scheduled_at }}">
+            <input name="scheduled_at" class="input" type="date" value="{{ $schedule->scheduled_at }}" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Tipo</label>
         <div class="control is-expanded">
             <div class="select is-fullwidth">
-                <select name="type">
+                <select name="type" required>
                     <option value="">--- Seleziona un tipo ---</option>
                     <option value="internal" @if ($schedule->type == 'internal') selected @endif>Interno</option>
                     <option value="external" @if ($schedule->type == 'external') selected @endif>Esterno</option>
@@ -30,7 +30,7 @@
         <label class="label">Veicolo</label>
         <div class="control is-expanded">
             <div class="select is-fullwidth">
-                <select name="vehicle">
+                <select name="vehicle" required>
                     <option value="">--- Seleziona un veicolo ---</option>
                     @foreach ($vehicles as $vehicle)
                     <option value="{{ $vehicle->id }}" @if ($schedule->vehicle->id == $vehicle->id) selected @endif>{{ $vehicle->plate }}</option>

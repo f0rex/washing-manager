@@ -11,7 +11,7 @@
     <div class="field">
         <label class="label">Nome del gruppo</label>
         <div class="control">
-            <input name="name" class="input" type="text" value={{ $group->name }}>
+            <input name="name" class="input" type="text" value={{ $group->name }} required>
         </div>
     </div>
     <div class="field">
@@ -29,13 +29,13 @@
     <div class="field">
         <label class="label">Numero di volte di pulizia interni per ciascuna vettura in 28 giorni</label>
         <div class="control">
-            <input name="internal" type="number" class="input" value={{ $group->internal }}>
+            <input name="internal" type="number" class="input" value={{ $group->internal }} required>
         </div>
     </div>
     <div class="field">
         <label class="label">Numero di volte di pulizia esterni per ciascuna vettura in 28 giorni</label>
         <div class="control">
-            <input name="external" type="number" class="input" value={{ $group->external }}>
+            <input name="external" type="number" class="input" value={{ $group->external }} required>
         </div>
     </div>
     <div class="field">

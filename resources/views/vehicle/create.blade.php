@@ -10,14 +10,14 @@
     <div class="field">
         <label class="label">Targa</label>
         <div class="control">
-            <input name="plate" class="input" type="text" placeholder="Targa">
+            <input name="plate" class="input" type="text" placeholder="Targa" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Gruppo</label>
         <div class="control is-expanded">
             <div class="select is-fullwidth">
-                <select name="group">
+                <select name="group" required>
                     <option value="">--- Seleziona un gruppo ---</option>
                     @foreach ($groups as $group)
                     <option value="{{ $group->id }}">{{ $group->name }}</option>

@@ -10,14 +10,14 @@
     <div class="field">
         <label class="label">Data lavaggio</label>
         <div class="control">
-            <input name="scheduled_at" class="input" type="date">
+            <input name="scheduled_at" class="input" type="date" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Tipo</label>
         <div class="control is-expanded">
             <div class="select is-fullwidth">
-                <select name="type">
+                <select name="type" required>
                     <option value="">--- Seleziona un tipo ---</option>
                     <option value="internal">Interno</option>
                     <option value="external">Esterno</option>
@@ -29,7 +29,7 @@
         <label class="label">Veicolo</label>
         <div class="control is-expanded">
             <div class="select is-fullwidth">
-                <select name="vehicle">
+                <select name="vehicle" required>
                     <option value="">--- Seleziona un veicolo ---</option>
                     @foreach ($vehicles as $vehicle)
                     <option value="{{ $vehicle->id }}">{{ $vehicle->plate }}</option>
