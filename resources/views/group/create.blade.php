@@ -10,7 +10,7 @@
     <div class="field">
         <label class="label">Nome del gruppo</label>
         <div class="control">
-            <input name="name" class="input" type="text" placeholder="Esempio: Furgoni" required>
+            <input name="name" class="input @error('name') is-danger @enderror" type="text" placeholder="Esempio: Furgoni" required>
         </div>
     </div>
     <div class="field">
@@ -28,25 +28,25 @@
     <div class="field">
         <label class="label">Numero di volte di pulizia interni per ciascuna vettura in 28 giorni</label>
         <div class="control">
-            <input name="internal" type="number" class="input" placeholder="Esempio: 4" required>
+            <input name="internal" type="number" min="1" class="input @error('internal') is-danger @enderror" placeholder="Esempio: 4" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Numero di volte di pulizia esterni per ciascuna vettura in 28 giorni</label>
         <div class="control">
-            <input name="external" type="number" class="input" placeholder="Esempio: 1" required>
+            <input name="external" type="number" min="1" class="input @error('external') is-danger @enderror" placeholder="Esempio: 1" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Numero di vetture nel gruppo</label>
         <div class="control">
-            <input v-model.number="vehicles" name="vehicles" type="number" class="input" placeholder="Esempio: 10" required>
+            <input v-model.number="vehicles" name="vehicles" type="number" min="0" class="input @error('vehicles') is-danger @enderror" placeholder="Esempio: 10" required>
         </div>
     </div>
     <div class="field" v-for="vehicle in vehicles">
         <label class="label">Vettura #@{{ vehicle }}</label>
         <div class="control">
-            <input name="plates[]" class="input" type="text" placeholder="Targa">
+            <input name="plates[]" class="input" type="text" placeholder="Targa" required>
         </div>
     </div>
     <div class="field">

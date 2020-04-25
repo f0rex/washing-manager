@@ -10,13 +10,13 @@
     <div class="field">
         <label class="label">Targa</label>
         <div class="control">
-            <input name="plate" class="input" type="text" placeholder="Targa" required>
+            <input name="plate" class="input @error('plate') is-danger @enderror" type="text" placeholder="Targa" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Gruppo</label>
         <div class="control is-expanded">
-            <div class="select is-fullwidth">
+            <div class="select is-fullwidth @error('group') is-danger @enderror">
                 <select name="group" required>
                     <option value="">--- Seleziona un gruppo ---</option>
                     @foreach ($groups as $group)

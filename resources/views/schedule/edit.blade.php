@@ -11,13 +11,13 @@
     <div class="field">
         <label class="label">Data lavaggio</label>
         <div class="control">
-            <input name="scheduled_at" class="input" type="date" value="{{ $schedule->scheduled_at }}" required>
+            <input name="scheduled_at" class="input @error('scheduled_at') is-danger @enderror" type="date" value="{{ $schedule->scheduled_at }}" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Tipo</label>
         <div class="control is-expanded">
-            <div class="select is-fullwidth">
+            <div class="select is-fullwidth @error('type') is-danger @enderror">
                 <select name="type" required>
                     <option value="">--- Seleziona un tipo ---</option>
                     <option value="internal" @if ($schedule->type == 'internal') selected @endif>Interno</option>
@@ -29,7 +29,7 @@
     <div class="field">
         <label class="label">Veicolo</label>
         <div class="control is-expanded">
-            <div class="select is-fullwidth">
+            <div class="select is-fullwidth @error('vehicle') is-danger @enderror">
                 <select name="vehicle" required>
                     <option value="">--- Seleziona un veicolo ---</option>
                     @foreach ($vehicles as $vehicle)
@@ -42,7 +42,7 @@
     <div class="field">
         <label class="label">Lavaggio effettuato il</label>
         <div class="control">
-            <input name="washed_at" class="input" type="date" value="{{ $schedule->washed_at }}">
+            <input name="washed_at" class="input @error('washed_at') is-danger @enderror" type="date" value="{{ $schedule->washed_at }}">
         </div>
     </div>
     <div class="field">

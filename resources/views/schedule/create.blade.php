@@ -10,13 +10,13 @@
     <div class="field">
         <label class="label">Data lavaggio</label>
         <div class="control">
-            <input name="scheduled_at" class="input" type="date" required>
+            <input name="scheduled_at" class="input @error('scheduled_at') is-danger @enderror" type="date" required>
         </div>
     </div>
     <div class="field">
         <label class="label">Tipo</label>
         <div class="control is-expanded">
-            <div class="select is-fullwidth">
+            <div class="select is-fullwidth @error('type') is-danger @enderror">
                 <select name="type" required>
                     <option value="">--- Seleziona un tipo ---</option>
                     <option value="internal">Interno</option>
@@ -28,7 +28,7 @@
     <div class="field">
         <label class="label">Veicolo</label>
         <div class="control is-expanded">
-            <div class="select is-fullwidth">
+            <div class="select is-fullwidth @error('vehicle') is-danger @enderror">
                 <select name="vehicle" required>
                     <option value="">--- Seleziona un veicolo ---</option>
                     @foreach ($vehicles as $vehicle)

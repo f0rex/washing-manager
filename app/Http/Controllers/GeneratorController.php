@@ -28,6 +28,10 @@ class GeneratorController extends Controller
 
     public function generate(Request $request)
     {
+        $validatedData = $request->validate([
+            'weeks' => ['required', 'integer'],
+        ]);
+
         DB::table('schedules')->truncate();
         $weeks = $request->weeks;
         $groups = Group::all();
@@ -80,6 +84,6 @@ class GeneratorController extends Controller
             }
         }
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success', 'Calendario generato con successo');
     }
 }

@@ -59,13 +59,19 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        $validatedData = $request->validate([
+            'scheduled_at' => ['required', 'date'],
+            'type' => ['required', 'in:internal,external'],
+            'vehicle' => ['required', 'exists:vehicles,id'],
+        ]);
+
         $schedule = new Schedule;
         $schedule->scheduled_at = Carbon::parse($request->scheduled_at);
         $schedule->type = $request->type;
         $schedule->vehicle()->associate($request->vehicle);
         $schedule->save();
 
-        return redirect()->route('schedule.index');
+        return redirect()->route('schedule.index')->with('success', 'Lavaggio aggiunto con successo');
     }
 
     /**
@@ -103,6 +109,13 @@ class ScheduleController extends Controller
     public function update(Request $request, $id)
     {
         //dd($request->all());
+        $validatedData = $request->validate([
+            'scheduled_at' => ['required', 'date'],
+            'type' => ['required', 'in:internal,external'],
+            'vehicle' => ['required', 'exists:vehicles,id'],
+            'washed_at' => ['nullable', 'date'],
+        ]);
+
         $schedule = Schedule::find($id);
 
         $schedule->type = $request->type;
@@ -115,7 +128,7 @@ class ScheduleController extends Controller
         $schedule->vehicle()->associate($request->vehicle);
         $schedule->save();
     
-        return redirect()->route('schedule.index');
+        return redirect()->route('schedule.index')->with('success', 'Lavaggio aggiornato con successo');
     }
 
     /**
@@ -127,6 +140,6 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         Schedule::destroy($id);
-        return redirect()->route('schedule.index');
+        return redirect()->route('schedule.index')->with('success', 'Lavaggio eliminato con successo');
     }
 }

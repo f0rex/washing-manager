@@ -39,12 +39,16 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        $validatedData = $request->validate([
+            'plate' => ['required', 'string'],
+            'group' => ['required', 'exists:groups,id'],
+        ]);
         $vehicle = new Vehicle;
         $vehicle->plate = $request->plate;
         $vehicle->group()->associate($request->group);
         $vehicle->save();
 
-        return redirect()->route('vehicle.index');
+        return redirect()->route('vehicle.index')->with('success', 'Veicolo aggiunto con successo');
     }
 
     /**
@@ -82,6 +86,13 @@ class VehicleController extends Controller
     public function update(Request $request, $id)
     {
         //dd($request->all());
+        $validatedData = $request->validate([
+            'plate' => ['required', 'string'],
+            'group' => ['required', 'exists:groups,id'],
+            'last_washed_internally_at' => ['nullable', 'date'],
+            'last_washed_externally_at' => ['nullable', 'date'],
+        ]);
+
         $vehicle = Vehicle::find($id);
         $vehicle->plate = $request->plate;
         if ($request->last_washed_internally_at == NULL) {
@@ -97,7 +108,7 @@ class VehicleController extends Controller
         $vehicle->group()->associate($request->group);
         $vehicle->save();
 
-        return redirect()->route('vehicle.index');
+        return redirect()->route('vehicle.index')->with('success', 'Veicolo aggiornato con successo');
     }
 
     /**
@@ -109,6 +120,6 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         Vehicle::destroy($id);
-        return redirect()->route('vehicle.index');
+        return redirect()->route('vehicle.index')->with('success', 'Veicolo eliminato con successo');
     }
 }

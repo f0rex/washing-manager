@@ -38,23 +38,37 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        $validatedData = $request->validate([
+            'name' => ['required', 'string'],
+            'internal' => ['required', 'integer', 'min:1'],
+            'external' => ['required', 'integer', 'min:1'],
+            'days' => ['nullable'],
+            'vehicles' => ['required', 'integer', 'min:0'],
+            'plates' => ['nullable'],
+            'plates.*' => ['required', 'string'],
+        ]);
+
         $group = new Group;
         $group->name = $request->name;
-        foreach ($request->days as $day) {
-            $group->{$day} = TRUE;
+        if ($request->has('days')) {
+            foreach ($request->days as $day) {
+                $group->{$day} = TRUE;
+            }
         }
         $group->internal = $request->internal;
         $group->external = $request->external;
         $group->save();
 
-        foreach ($request->plates as $plate) {
-            $vehicle = new Vehicle;
-            $vehicle->plate = $plate;
-            $vehicle->group()->associate($group);
-            $vehicle->save();
+        if ($request->has('plates')) {
+            foreach ($request->plates as $plate) {
+                $vehicle = new Vehicle;
+                $vehicle->plate = $plate;
+                $vehicle->group()->associate($group);
+                $vehicle->save();
+            }
         }
 
-        return redirect()->route('group.index');
+        return redirect()->route('group.index')->with('success', 'Gruppo aggiunto con successo');
     }
 
     /**
@@ -89,6 +103,13 @@ class GroupController extends Controller
     public function update(Request $request, $id)
     {
         //dd($request->all());
+        $validatedData = $request->validate([
+            'name' => ['required', 'string'],
+            'internal' => ['required', 'integer', 'min:1'],
+            'external' => ['required', 'integer', 'min:1'],
+            'days' => ['nullable'],
+        ]);
+
         $group = Group::find($id);
         $group->name = $request->name;
         $group->mon = $group->tue = $group->wed = $group->thu = $group->fri = $group->sat = $group->sun = FALSE;
@@ -99,7 +120,7 @@ class GroupController extends Controller
         $group->external = $request->external;
         $group->save();
 
-        return redirect()->route('group.index');
+        return redirect()->route('group.index')->with('success', 'Gruppo aggiornato con successo');
     }
 
     /**
@@ -111,6 +132,6 @@ class GroupController extends Controller
     public function destroy($id)
     {
         Group::destroy($id);
-        return redirect()->route('group.index');
+        return redirect()->route('group.index')->with('success', 'Gruppo eliminato con successo');
     }
 }

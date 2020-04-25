@@ -34,6 +34,21 @@
         </nav>
         <section class="section">
             <div class="container">
+
+                @if ($errors->any())
+                <div class="notification is-danger has-text-centered">   
+                    @foreach ($errors->all() as $error)
+                        {{ $error }} <br>
+                    @endforeach
+                </div>
+                @endif
+
+                @if (session('success'))
+                <div class="notification is-success has-text-centered">   
+                    {{ session('success') }}
+                </div>
+                @endif
+ 
                 @yield('content')
             </div>
         </section>
