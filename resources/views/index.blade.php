@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="notification is-warning has-text-centered">   
+    <strong>Versione 1.1:</strong> Sistemata la generazione del calendario. Generare un nuovo calendario per correggere gli errori in quello attuale
+</div>
 <h1 class="title has-text-centered">
     Calendario
 </h1>
 @foreach ($schedules as $day => $types)
-<div class="box">
-    <article class="media">
-        <div class="media-content">
-            <div class="content">
-                <p>
+        @if ($loop->index % 7 == 0)
+        <div class="columns">
+        @endif
+        <div class="column">
+
                     <strong>{{ date('l j F, Y', strtotime($day)) }}</strong>
                     <br>
                     @foreach ($types as $type => $listings)
@@ -27,16 +30,17 @@
                             </span>
                         </a>
                         @else
-                        <del>{{ $listing->vehicle->plate }}</del>
+                        <del>{{ $listing->vehicle->plate }} ({{ $listing->vehicle->group->name }})</del>
                         @endif
                         <br>
                         @endforeach
                     </p>
                     @endforeach
-                </p>
-            </div>
-        </div>
-    </article>
+               
+@if ($loop->iteration % 7 == 0)
+</div>
+        @endif
+
 </div>
 @endforeach
 @endsection

@@ -7,8 +7,9 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Vehicle::class, function (Faker $faker) {
+    static $number = 1;
     return [
-        'plate' => strtoupper(Str::random(7)),
+        'plate' => $number++,
         'last_washed_internally_at' => NULL,
         'last_washed_externally_at' => NULL,
         'created_at' => now(),

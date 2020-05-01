@@ -40,5 +40,19 @@ class GroupSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('groups')->insert([
+            'name' => 'Test',
+            'mon' => TRUE,
+            'tue' => TRUE,
+            'wed' => TRUE,
+            'thu' => FALSE,
+            'fri' => FALSE,
+            'sat' => FALSE,
+            'sun' => FALSE,
+            'internal' => 4,
+            'external' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

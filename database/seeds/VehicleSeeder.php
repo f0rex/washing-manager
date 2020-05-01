@@ -25,5 +25,12 @@ class VehicleSeeder extends Seeder
             ->each(function ($vehicle) use ($vansGroup) {
                 $vehicle->group()->associate($vansGroup)->save();
             });
+        
+        $testGroup = Group::find(3);
+        $test = factory(App\Vehicle::class, 2)
+            ->make()
+            ->each(function ($vehicle) use ($testGroup) {
+                $vehicle->group()->associate($testGroup)->save();
+            });
     }
 }
